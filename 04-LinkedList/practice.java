@@ -1,4 +1,5 @@
 // linked list practice
+// leetcode 21, 141, 
 
 class Node{
     int data;
@@ -14,6 +15,7 @@ public class practice{
     public static void printLL(Node head){
         if(head==null){
             System.out.println(head);
+            return;
         }
 
         Node curr = head;
@@ -86,8 +88,30 @@ public class practice{
         }
 
         newNode.next = head;
-        return newNode;
+        head = newNode;
+        return head;
     }
+
+    // to insert the element in the middle of a linked list
+     public static Node insertAtMiddle(Node head, int value, int pos){
+
+        if(pos == 1){
+            return insertAtFront(head, value);
+        }
+
+        Node newNode = new Node(value);
+        Node temp = head;
+
+        for(int i = 1; i < pos - 1; i++){
+            temp = temp.next;
+        }
+
+        newNode.next = temp.next;
+        temp.next = newNode;
+
+        return head;
+    }
+
 
     // to reverse a linked list
     public static Node reverseLL(Node head){
@@ -112,7 +136,7 @@ public class practice{
         Node slow = head;
         Node fast = head;
 
-        while(fast!=null && fast.next!=null){
+        while(fast != null && fast.next != null){
             slow = slow.next;
             fast = fast.next.next;
             
@@ -123,14 +147,14 @@ public class practice{
 
     // check whether the cycle exists in linked list or not
     public static boolean checkCycle(Node head){
-         Node slow = head;
+        Node slow = head;
         Node fast = head;
 
-        while(fast!=null && fast.next!=null){
+        while(fast != null && fast.next != null){
             slow = slow.next;
             fast = fast.next.next;
 
-            if(slow==fast){
+            if(slow == fast){
                 return true;
             }
             
@@ -144,14 +168,14 @@ public class practice{
         Node newNode = new Node(1);
         newNode.next = new Node(2);
         newNode.next.next = new Node(3);
-        newNode.next.next.next = newNode;
+        newNode.next.next.next = new Node(4);
         // printLL(newNode);
         // System.out.println("The size of the linked list is: "+sizeLL(newNode));
         // System.out.println(search(newNode,3));
         
-        // printLL(insertAtFront(newNode,6));
-        // printLL(insertAtEnd(newNode,5));
-        // printLL(reverseLL(newNode));
+        // newNode = insertAtFront(newNode,12);
+        // // printLL(insertAtEnd(newNode,5));
+        printLL(reverseLL(newNode));
 
         // System.out.println(middleLL(newNode));
         System.out.println(checkCycle(newNode));
